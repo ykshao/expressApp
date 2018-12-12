@@ -1,0 +1,35 @@
+{
+  "apps": [
+    {
+      "name": "expressApp",
+      "script": "app.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "node",
+      "host": "212.83.163.1",
+      "ref": "origin/master",
+      "repo": "git@github.com:ykshao/nodejs-study.git",
+      "path": "/data/frontend/node",
+      "post-deploy": "npm install && pm2 startOrRestart ecosystem.json --env production"
+    },
+    "dev": {
+      "user": "node",
+      "host": "212.83.163.1",
+      "ref": "origin/master",
+      "repo": "git@github.com:repo.git",
+      "path": "/data/frontend/node_dev",
+      "post-deploy": "npm install && pm2 startOrRestart ecosystem.json --env dev",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    }
+  }
+}
